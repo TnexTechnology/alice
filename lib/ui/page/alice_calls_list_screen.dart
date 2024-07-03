@@ -8,6 +8,7 @@ import 'package:alice/utils/alice_constants.dart';
 import 'package:alice/ui/widget/alice_call_list_item_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'alice_list_log_screen.dart';
 import 'alice_stats_screen.dart';
 
 class AliceCallsListScreen extends StatefulWidget {
@@ -49,6 +50,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen> {
           appBar: AppBar(
             title: _searchEnabled ? _buildSearchField() : _buildTitleWidget(),
             actions: [
+              _buildNotifyButton(),
               _buildSearchButton(),
               _buildMenuButton(),
             ],
@@ -69,6 +71,20 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen> {
     return IconButton(
       icon: const Icon(Icons.search),
       onPressed: _onSearchClicked,
+    );
+  }
+
+  Widget _buildNotifyButton() {
+    return IconButton(
+      icon: const Icon(Icons.add_alert),
+      onPressed: () {
+        Navigator.push<void>(
+          widget._aliceCore.getContext()!,
+          MaterialPageRoute(
+            builder: (context) => AliceListLogScreen(widget._aliceCore),
+          ),
+        );
+      },
     );
   }
 
@@ -107,7 +123,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen> {
   }
 
   Widget _buildTitleWidget() {
-    return const Text("Alice - Inspector");
+    return const Text("Alice");
   }
 
   Widget _buildSearchField() {

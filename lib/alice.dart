@@ -11,6 +11,7 @@ import 'package:alice/core/alice_http_client_adapter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+String logNotify = "";
 class Alice {
   /// Should user be notified with notification if there's new request catched
   /// by Alice
@@ -118,5 +119,11 @@ class Alice {
     assert(aliceHttpCall.request != null, "Http call request can't be null");
     assert(aliceHttpCall.response != null, "Http call response can't be null");
     _aliceCore.addCall(aliceHttpCall);
+  }
+
+  void addLog(String textLog) {
+    if (textLog.isNotEmpty) {
+      logNotify = textLog + "\n" + "--------------------" + "\n" + logNotify;
+    }
   }
 }
